@@ -1,239 +1,165 @@
 ---
-title: API Reference
+title: SCM API Reference
 
 language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
-  - python
-  - javascript
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - shell: cURL
+  - ruby: Ruby
+  - php: PHP
+  - csharp: C#
+  - javascript: NodeJS
 
 includes:
+ 
   - errors
+  
 
 search: true
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to the SCM API! You can use our API to access SCM API endpoints, which can get information on various details such as Invoice, products, among others in our database.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+We have language bindings in Shell, Ruby, PHP, and JavaScript! You can read this for proper usage of our Supply Chain Management System.
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+Thi API documentation page was created with [Nmicros](https://nmicros.com/). Feel free to check out other services that we offer.
+First things first we have to [Sign in](https://nmicrosscmweb.azurewebsites.net/Account/Login?ReturnUrl=%2F) to the SCM website in order to use our API Endpoints. The API endpoint for SCM can be found by clicking the link [here](https://nmicrosscmapi.azurewebsites.net/)
+
+In order to access the api, from the api endpoint, click authorize and login with your details. Note that you've to be registered for the supply chain application.
+
+# Users
+Users API gives you access to get basic information about other users involved in the supply chain process.
+
+<aside class="info">This endpoint protects the privacy of users. It is <strong>NOT</strong> possible to extract personal details of all the users from this endpoint. An admin however can extract the personal details using the Admin APIs.</aside>
+
+The field below shows all possible parameters from user to vendor
+
+### Fields
+
+Name | Type | Description
+-----|------|-------------
+id   | int  | The user unique ID
+url  | string | URL to get details of the user
+username(Name) | string | Username of the user
+first_name | string | First name of the user
+last_name | string | Last name of the user
+email | string | Email of the user
+password | string | Password of the user entered while registering
+birth_date | datestring | Birth date as provided by the user
+gender | string | Gender as provided by the user. Can be "Male", "Female" or "Transgender"
+address1 | string | Address provided by the user
+address2 | string | Address provided by the user
+city | string | City provided by the user
+zip | string | Pincode provided by the user
+state | string | State provided by the user
+phone | string | Phone provided by the user
+
+### Create User
+
+To create a user, click add and then enter the following parameters:
+* Email
+* Full Name
+* Name
+* Surname
+* User name
+* Click the checkbox if user is active or not
+
+### HTTP Request
+
+`POST https://nmicrosscmweb.azurewebsites.net/api/services/app/User/Create`
+
+### Role
+
+A user can easily change roles only if they are logged in as admins.
+
+### List all users
+
+To view the list of all users, click on the link below
+
+`POST https://nmicrosscmweb.azurewebsites.net/api/services/app/UnitOfMeasure/ListAll`
+
+# Supplier APIs
+This API provides access to all operations done by the supplier.
+
+
 
 # Authentication
 
 > To authorize, use this code:
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
+```csharp
+var client = new RestClient("https://nmicrosscmweb.azurewebsites.net/api/TokenAuth/Authenticate/");
+var request = new RestRequest(Method.POST);
+request.AddHeader("cache-control", "no-cache");
+request.AddHeader("content-type", "application/json-patch+json");
+request.AddParameter("application/json-patch+json", "{\n    \"username\": \"admin\",\n    \"password\": \"password\"\n}", ParameterType.RequestBody);
+IRestResponse response = client.Execute(request);
 ```
 
 ```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
+# With shell, you can just pass the user credentials to get the auth token
+curl --request POST \
+  --url https://nmicrosscmweb.azurewebsites.net/api/TokenAuth/Authenticate/ \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json-patch+json' \
+  --data '{"username": "admin", "password": "password"}'
 ```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
+>The above command returns a JSON structured like this:
 
 ```json
 [
   {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
+  "userNameOrEmailAddress": "string",
+  "password": "string",
+  "rememberClient": true
+}
 ]
 ```
 
-This endpoint retrieves all kittens.
+```php
+<?php
 
-### HTTP Request
+$request = new HttpRequest();
+$request->setUrl('https://nmicrosscmweb.azurewebsites.net/api/TokenAuth/Authenticate/');
+$request->setMethod(HTTP_METH_POST);
 
-`GET http://example.com/api/kittens`
 
-### Query Parameters
+$request->setBody('-----011000010111000001101001
+Content-Disposition: form-data; name="username"
 
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+password
+-----011000010111000001101001
+Content-Disposition: form-data; name="password"
 
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
+password
+-----011000010111000001101001--');
 
-## Get a Specific Kitten
+try {
+  $response = $request->send();
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  echo $response->getBody();
+} catch (HttpException $ex) {
+  echo $ex;
 }
 ```
-
-This endpoint retrieves a specific kitten.
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
 ### HTTP Request
 
-`GET http://example.com/kittens/<ID>`
+`POST https://nmicrosscmweb.azurewebsites.net/api/TokenAuth/Authenticate/`
 
-### URL Parameters
+Name | Type | Description
+-----|------|-------------
+username | string | Username of the user
+password | string | Password of the user
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
+# Vendor
 
-## Delete a Specific Kitten
+This section contains the list of all customers using the SCM application
 
-```ruby
-require 'kittn'
+### Create a vendor
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
+To create a vendor, click the link below
 
-```python
-import kittn
+`POST https://nmicrosscmweb.azurewebsites.net/api/services/app/Vendor/CreateAsync`
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
 
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "deleted" : ":("
-}
-```
-
-This endpoint deletes a specific kitten.
-
-### HTTP Request
-
-`DELETE http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
 
