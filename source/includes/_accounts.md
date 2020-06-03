@@ -90,9 +90,7 @@ Email | Customer's email address
 Contact Person | The person to contact in case of emergency
 
 ```shell
-curl --request POST \
-  --url https://nmicrosscmapi.azurewebsites.net/api/services/app/Accounts/CreateAsync \
-  --header 'cache-control: no-cache'
+curl -X POST "https://nmicrosscmapi.azurewebsites.net/api/services/app/Accounts/CreateAsync" -H "accept: application/json" -H "Content-Type: application/json-patch+json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6ImY0NjRhZjk2LTlhNTgtYzM0MS02YTYzLTM5ZjIxMWY0YzcxMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwic3ViIjoiMSIsImp0aSI6IjEzM2M4OWUwLWZhMTUtNGU2Ni1iYzM5LWM3MGQ0YjA1MWU5YSIsImlhdCI6MTU5MTA4MDY3NSwibmJmIjoxNTkxMDgwNjc1LCJleHAiOjE1OTExNjcwNzUsImlzcyI6IlNDTSIsImF1ZCI6IlNDTSJ9.HJ1NdDtscJUn9W8xrVGUWey26KEI-9uFo_NqI1R9hF4" -d "{ \"customerId\": 8, \"parentAccountId\": 0, \"tenantId\": 0, \"customer\": { \"tenantId\": 0, \"customerName\": \"any\", \"customerTypeId\": 0, \"address\": \"string\", \"city\": \"string\", \"state\": \"string\", \"zipCode\": \"string\", \"phone\": \"string\", \"email\": \"string\", \"contactPerson\": \"string\", \"idNumber\": \"string\", \"idType\": \"string\", \"accountType\": \"string\", \"xcoordinate\": 0, \"ycoordinate\": 0, \"accountNumber\": 0, \"referenceNumber\": 0, \"imagelocation\": \"string\", \"website\": \"string\", \"industry\": \"string\", \"rating\": \"string\", \"phoneAlternative\": \"string\", \"countryId\": 0, \"country\": { \"tenantId\": 0, \"countryName\": \"string\", \"countryZone\": \"string\", \"isDeleted\": true, \"deleterUserId\": 0, \"deletionTime\": \"2020-06-01T20:44:12.099Z\", \"lastModificationTime\": \"2020-06-01T20:44:12.099Z\", \"lastModifierUserId\": 0, \"creationTime\": \"2020-06-01T20:44:12.099Z\", \"creatorUserId\": 0, \"id\": 0 }, \"parent_CustomerId_Id\": 0, \"email2\": \"string\", \"ownership\": \"string\", \"taxId\": \"string\", \"vatNo\": \"string\", \"gender\": \"string\", \"accounts\": [ { \"customerId\": 0, \"parentAccountId\": 0, \"tenantId\": 0, \"totalLoanAmount\": 0, \"totalAmountPaid\": 0, \"balance\": 0, \"is_Open\": true, \"isDeleted\": true, \"deleterUserId\": 0, \"deletionTime\": \"2020-06-01T20:44:12.099Z\", \"lastModificationTime\": \"2020-06-01T20:44:12.099Z\", \"lastModifierUserId\": 0, \"creationTime\": \"2020-06-01T20:44:12.099Z\", \"creatorUserId\": 0, \"id\": 0 } ], \"isDeleted\": true, \"deleterUserId\": 0, \"deletionTime\": \"2020-06-01T20:44:12.099Z\", \"lastModificationTime\": \"2020-06-01T20:44:12.099Z\", \"lastModifierUserId\": 0, \"creationTime\": \"2020-06-01T20:44:12.099Z\", \"creatorUserId\": 0, \"id\": 0 }, \"totalLoanAmount\": 0, \"totalAmountPaid\": 0, \"balance\": 0, \"is_Open\": true, \"isDeleted\": true, \"deleterUserId\": 0, \"deletionTime\": \"2020-06-01T20:44:12.099Z\", \"lastModificationTime\": \"2020-06-01T20:44:12.099Z\", \"lastModifierUserId\": 0, \"creationTime\": \"2020-06-01T20:44:12.100Z\", \"creatorUserId\": 0, \"id\": 0}"
 ```
 ```ruby
 require 'uri'
@@ -647,10 +645,15 @@ Description | string | The details of the activity
 
 > To create an activity, use this code:
 
+```shell
+curl -X POST "https://nmicrosscmapi.azurewebsites.net/api/services/app/Activities/CreateAsync" -H "accept: application/json" -H "Content-Type: application/json-patch+json" -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6ImY0NjRhZjk2LTlhNTgtYzM0MS02YTYzLTM5ZjIxMWY0YzcxMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwic3ViIjoiMSIsImp0aSI6IjEzM2M4OWUwLWZhMTUtNGU2Ni1iYzM5LWM3MGQ0YjA1MWU5YSIsImlhdCI6MTU5MTA4MDY3NSwibmJmIjoxNTkxMDgwNjc1LCJleHAiOjE1OTExNjcwNzUsImlzcyI6IlNDTSIsImF1ZCI6IlNDTSJ9.HJ1NdDtscJUn9W8xrVGUWey26KEI-9uFo_NqI1R9hF4" -d "{ \"tenantId\": 0, \"activityName\": \"act\", \"description\": \"nothing\", \"isDeleted\": true, \"deleterUserId\": 0, \"deletionTime\": \"2020-06-02T07:28:32.809Z\", \"lastModificationTime\": \"2020-06-02T07:28:32.809Z\", \"lastModifierUserId\": 0, \"creationTime\": \"2020-06-02T07:28:32.809Z\", \"creatorUserId\": 0, \"id\": 0}"
+```
+
 ```csharp
 var client = new RestClient("https://nmicrosscmapi.azurewebsites.net/api/services/app/Activities/CreateAsync");
 var request = new RestRequest(Method.POST);
 request.AddHeader("cache-control", "no-cache");
+request.AddHeader("authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6ImY0NjRhZjk2LTlhNTgtYzM0MS02YTYzLTM5ZjIxMWY0YzcxMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwic3ViIjoiMSIsImp0aSI6IjEzM2M4OWUwLWZhMTUtNGU2Ni1iYzM5LWM3MGQ0YjA1MWU5YSIsImlhdCI6MTU5MTA4MDY3NSwibmJmIjoxNTkxMDgwNjc1LCJleHAiOjE1OTExNjcwNzUsImlzcyI6IlNDTSIsImF1ZCI6IlNDTSJ9.HJ1NdDtscJUn9W8xrVGUWey26KEI-9uFo_NqI1R9hF4");
 request.AddHeader("content-type", "application/json");
 IRestResponse response = client.Execute(request);
 ```
@@ -665,6 +668,7 @@ var options = {
   "path": "/api/services/app/Activities/CreateAsync",
   "headers": {
     "content-type": "application/json",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiYWRtaW4iLCJBc3BOZXQuSWRlbnRpdHkuU2VjdXJpdHlTdGFtcCI6ImY0NjRhZjk2LTlhNTgtYzM0MS02YTYzLTM5ZjIxMWY0YzcxMyIsImh0dHA6Ly9zY2hlbWFzLm1pY3Jvc29mdC5jb20vd3MvMjAwOC8wNi9pZGVudGl0eS9jbGFpbXMvcm9sZSI6IkFkbWluIiwic3ViIjoiMSIsImp0aSI6IjEzM2M4OWUwLWZhMTUtNGU2Ni1iYzM5LWM3MGQ0YjA1MWU5YSIsImlhdCI6MTU5MTA4MDY3NSwibmJmIjoxNTkxMDgwNjc1LCJleHAiOjE1OTExNjcwNzUsImlzcyI6IlNDTSIsImF1ZCI6IlNDTSJ9.HJ1NdDtscJUn9W8xrVGUWey26KEI-9uFo_NqI1R9hF4",
     "cache-control": "no-cache"
   }
 };
@@ -683,8 +687,8 @@ var req = http.request(options, function (res) {
 });
 
 req.write(JSON.stringify({ tenantId: '9',
-  activityName: '',
-  description: '',
+  activityName: 'act',
+  description: 'nothing',
   isDeleted: '',
   deleterUserId: '',
   deletionTime: '',
@@ -699,8 +703,8 @@ req.end();
 ```json
 {
   "tenantId": 0,
-  "activityName": "string",
-  "description": "string",
+  "activityName": "act",
+  "description": "nothing",
   "isDeleted": true,
   "deleterUserId": 0,
   "deletionTime": "2020-05-12T14:30:48.782Z",
@@ -711,6 +715,20 @@ req.end();
   "id": 0
 }
 ```
+
+> With the following Response body
+
+```json
+{
+  "result": null,
+  "targetUrl": null,
+  "success": true,
+  "error": null,
+  "unAuthorizedRequest": false,
+  "__abp": true
+}
+```
+
 ## Delete
 
 This endpoint ebables us to delete a particular activity.

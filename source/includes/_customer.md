@@ -32,6 +32,10 @@ phone | string | Phone provided by the customer
 
 ## Create Customer
 
+```shell
+
+```
+
 ```php
 <?php
 
